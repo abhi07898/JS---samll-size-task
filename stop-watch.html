@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Stop-WATCH practise
+	</title>
+	<style >
+		body {
+			margin:200px;
+		}
+		.btn-design {
+			padding: 10px 20px;
+			background-color: red;
+			color: white;
+		}
+		.btn-design:hover {
+			padding: 10px 20px;
+			background-color: black;
+			color: white;
+		}
+		.stopwatch {
+			margin:auto;
+			font-size: 60px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="constrol">
+		<button class="btn-design" onclick="start()">START</button>
+		<button class="btn-design" onclick="pause()">PAUSE</button>
+		<button class="btn-design" onclick="stop()">STOP</button>
+		<button class="btn-design" onclick="restart()">RESTART</button>
+		<button class="btn-design" onclick="lap()">LAP</button>
+		<button class="btn-design" onclick="resetlaps()">RESET LAPS</button>
+	</div>
+	<div class="stopwatch">00:00:00</div>
+	<ul class="laps"></ul>
+	<script>
+		var ms=0, s=0, m=0;
+		var timer;
+		var stopwatchElement = document.querySelector('.stopwatch');
+		var lapElement = document.querySelector('.laps');
+
+
+		function start() {
+			if(!timer) {
+				timer = setInterval(run, 10);
+			}
+			
+		}
+		function run() {
+			stopwatchElement.textContent = getTimer();
+			ms++;
+			if(ms == 100) {
+				ms = 0;
+				s++;
+			}
+			if(s == 60) {
+				s = 0;
+				m++;
+			}
+		}
+		function getTimer() {
+			return (m<10 ? "0"+ m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + (ms < 10 ? "0"+ ms : ms);
+		}
+		function pause() {
+			clearInterval(timer);
+			timer = false;
+		}
+		function stop() {
+			clearInterval(timer);
+			timer = false;
+			ms = 0;
+			s = 0;
+			m = 0;
+			stopwatchElement.textContent = getTimer();
+		}
+		function restart() {
+			stop();
+			start();
+		}
+		// debugger;
+		function lap() {
+				if(timer) {
+				var li = document.createElement('li');
+				li.innerText = getTimer();
+				lapElement.appendChild(li);
+			}
+		}
+		function resetlaps() {
+			lapElement.textContent = '';
+		}
+	</script> 
+</body>
+</html>

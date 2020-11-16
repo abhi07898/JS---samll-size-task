@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>random-Color</title>
+	<style type="text/css">
+		.header {
+			background-color: red;
+			color: yellow;
+			font-size: 50px;
+			text-align: center;
+			padding: 10px;
+			margin-bottom: 100px;
+		}
+		.box{
+			width: 50%;
+			margin: auto;
+			height: 400px;
+			border: 1px solid red;
+			text-align: center;
+			padding: 10px;
+			background-color: transparent;
+		}
+	</style>
+</head>
+<body>
+<div class="header">Random Color using JS</div>
+<div class="box" id="box">
+	<div class="rgb" id="rgb">
+		
+	</div>
+	<button onclick ="colorpicker();">Click Me !!! </button>
+</div>
+
+<script type="text/javascript">
+	function colorpicker() {
+		var newcolor = makeColor();
+		document.getElementById('box').style.backgroundColor=newcolor;
+		document.getElementById('rgb').innerHTML = newcolor;
+	}
+
+	function makeColor(){
+		var color=[];
+		for (var i =0; i< 3; i++) {
+			var num = Math.floor(Math.random()*256);
+			color.push(num);
+		}
+		var newRgb = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
+		return newRgb;
+	}
+</script>
+</body>
+</html>
